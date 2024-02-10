@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:wrale/core/preferences.dart';
+import 'package:wrale/pages/home.dart';
+import 'package:wrale/pages/onBoarding.dart';
 
 class Splash extends StatefulWidget {
   const Splash({super.key});
@@ -32,7 +34,9 @@ class _SplashState extends State<Splash> {
       Navigator.of(context).pop();
       Navigator.of(context).push(MaterialPageRoute<Scaffold>(
         builder: (BuildContext context) {
-          return prefs.showOnBoarding ? const onBoardingPage() : const Home();
+          return (prefs.showOnBoarding || true)
+              ? const OnBoardingPage()
+              : const Home();
         },
       ));
     }

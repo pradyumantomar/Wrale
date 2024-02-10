@@ -4,7 +4,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:wrale/core/notifier.dart';
 import 'package:wrale/core/preferences.dart';
-import 'package:wrale/core/theme.dart';
+
 import 'package:wrale/pages/splash.dart';
 
 const String measurementBoxName = 'measurements';
@@ -35,14 +35,14 @@ class WraleApp extends MaterialApp {
     // required this.light,
     // required this.dark,
     // required this.amoled,
-  }) : super(
-        // theme: ,
-        // darkTheme: ,
-        // themeMode:  ,
-        // localizationsDelegates: ,
-        // supportedLocales:  ,
-        // locale: ,
-        );
+  }) : super(debugShowCheckedModeBanner: false
+            // theme: ,
+            // darkTheme: ,
+            // themeMode:  ,
+            // localizationsDelegates: ,
+            // supportedLocales:  ,
+            // locale: ,
+            );
 
   /// themeNotifier for interactive change of theme
   final WraleNotifier wraleNotifier;

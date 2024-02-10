@@ -1,4 +1,5 @@
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:wrale/core/language.dart';
 
 /// Class to coordinate shared preferences access
 class Preferences {
@@ -25,6 +26,25 @@ class Preferences {
 
   ///shared preference instance
   late SharedPreferences prefs;
+
+  /// default values
+  /// default for userName
+  final String defaultUserName = '';
+
+  /// default for nightMode setting
+  final String defaultNightMode = 'auto';
+
+  /// default for isAmoled
+  final bool defaultIsAmoled = false;
+
+  //show onBoardingPage to user
+  final bool showOnBoarding = true;
+
+  /// set if onBoarding screen is shown
+  set showOnBoarding(bool show) => prefs.setBool('showOnBoarding', show);
+
+  /// default language
+  final Language defaultLanguage = Language.system();
 
   void loadDefaultSettings({bool override = false}) {}
 
