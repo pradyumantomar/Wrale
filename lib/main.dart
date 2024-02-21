@@ -10,14 +10,13 @@ import 'package:wrale/pages/splash.dart';
 const String measurementBoxName = 'measurements';
 
 Future<void> main() async {
-  //load singleton
   WidgetsFlutterBinding.ensureInitialized();
   final Preferences prefs = Preferences();
   await prefs.loaded;
   final WraleNotifier wraleNotifier = WraleNotifier();
 
   await Hive.initFlutter();
-  // Hive.registerAdapter();
+
   await Hive.openBox(measurementBoxName);
 
   return runApp(ChangeNotifierProvider<WraleNotifier>.value(
@@ -28,27 +27,13 @@ Future<void> main() async {
 
 class WraleApp extends MaterialApp {
   /// Constructor
-  WraleApp({
+  const WraleApp({
     super.key,
     required this.wraleNotifier,
     super.routes,
-    // required this.light,
-    // required this.dark,
-    // required this.amoled,
-  }) : super(debugShowCheckedModeBanner: false
-            // theme: ,
-            // darkTheme: ,
-            // themeMode:  ,
-            // localizationsDelegates: ,
-            // supportedLocales:  ,
-            // locale: ,
-            );
+  }) : super(debugShowCheckedModeBanner: false);
 
-  /// themeNotifier for interactive change of theme
   final WraleNotifier wraleNotifier;
-  // final WraleTheme light;
-  // final WraleTheme dark;
-  // final WraleTheme amoled;
 }
 
 class WraleMainApp extends StatelessWidget {

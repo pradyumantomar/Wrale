@@ -1,5 +1,7 @@
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:wrale/core/language.dart';
+import 'package:wrale/core/theme.dart';
+import 'package:wrale/core/units.dart';
 
 /// Class to coordinate shared preferences access
 class Preferences {
@@ -31,6 +33,18 @@ class Preferences {
   /// default for userName
   final String defaultUserName = '';
 
+  // default for userTargetWeight in kg
+  final double defaultUserTargetWeight = -1;
+
+  // default for userTargetWeight in kg
+  final double defaultUserWeight = 70;
+
+  // default for userHeight in m
+  final double defaultUserHeight = -1;
+
+  // default for show onBoarding screen
+  final bool defaultShowOnBoarding = true;
+
   /// default for nightMode setting
   final String defaultNightMode = 'auto';
 
@@ -40,13 +54,35 @@ class Preferences {
   //show onBoardingPage to user
   final bool showOnBoarding = true;
 
-  /// set if onBoarding screen is shown
-  set showOnBoarding(bool show) => prefs.setBool('showOnBoarding', show);
-
   /// default language
   final Language defaultLanguage = Language.system();
 
-  void loadDefaultSettings({bool override = false}) {}
+  /// default for theme
+  final String defaultTheme = WraleCustomTheme.water.name;
+
+  ///default unit
+  final WraleUnit defaultUnit = WraleUnit.kg;
+
+  /// default interpolation strength
+  // final Interpolation defaultInterpolationStrength = InterpolStrength.medium;
+
+  ///
+
+  /// set if onBoarding screen is shown
+  set showOnBoarding(bool show) => prefs.setBool('showOnBoarding', show);
+
+// set username
+  set userName(String name) => prefs.setString('userName', name);
+
+  /// get username
+
+  String get userName => prefs.getString('userName')!;
+
+  void loadDefaultSettings({bool override = false}) {
+    if (override || !prefs.containsKey('userName')) {
+      userName = defaultUserName;
+    }
+  }
 
   void resetSettings() => loadDefaultSettings(override: true);
 }

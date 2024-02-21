@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:wrale/core/icons.dart';
 import 'package:wrale/pages/overview.dart';
 import 'package:wrale/pages/statsScreen.dart';
+import 'package:wrale/widget/app_drawer.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -122,7 +124,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
               SliverAppBar(
                 leading: IconButton(
                     onPressed: () => key.currentState!.openDrawer(),
-                    icon: Icon(Icons.settings)),
+                    icon: const Icon(CustomIcons.settings)),
               ),
             ];
           },
@@ -134,6 +136,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
         onPressed: onFABpress,
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
+      drawer: appDrawer(context, (p0) => null, _pageIndex),
     );
   }
 }
