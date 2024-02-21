@@ -1,3 +1,4 @@
+// Unit of weight measurements
 enum WraleUnit {
   kg,
   st,

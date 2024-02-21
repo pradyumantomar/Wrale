@@ -1,6 +1,54 @@
+import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:wrale/core/notifier.dart';
+
+// get color (black or white ) with maximal constrast or minimal (inverse = false)
+Color getFontColor(Color color, {bool inverse = true}) {
+  return isDarkColor(color) == inverse ? Colors.white : Colors.black;
+}
+
+/// check if color is closer to black or white
+bool isDarkColor(Color color) {
+  final double luminance =
+      0.2126 * color.red + 0.7152 * color.green + 0.0722 * color.blue;
+
+  return luminance < 140;
+}
+
+/// return opacity corresponding to elevation
+double overlayOpacity(double elevation) =>
+    (4.5 * math.log(elevation + 1) + 2) / 100.0;
+
+///overlay color with elevation
+Color colorElevated(Color color, double elevation) => Color.alphaBlend(
+      getFontColor(color).withOpacity(overlayOpacity(elevation)),
+      color,
+    );
+
+/// Class holding three different transition durations
+class TransitionDuration {
+  // constructor
+  TransitionDuration(
+    this._fast,
+    this._normal,
+    this._slow,
+  );
+
+  // get duration of fast transition
+  Duration get fast => Duration(milliseconds: _fast);
+  // get duration of fast transition
+  Duration get normal => Duration(milliseconds: _normal);
+  // get duration of fast transition
+  Duration get slow => Duration(milliseconds: _slow);
+
+  // length of duration in ms
+  final int _fast;
+  // length of duration in ms
+  final int _normal;
+  // length of duration in ms
+  final int _slow;
+}
 
 class WraleTheme {
   WraleTheme(

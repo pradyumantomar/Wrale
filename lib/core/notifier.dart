@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/date_time_patterns.dart';
 import 'package:intl/intl.dart';
 import 'package:wrale/core/database.dart';
+import 'package:wrale/core/interpolation.dart';
 import 'package:wrale/core/language.dart';
 import 'package:wrale/core/preferences.dart';
 import 'package:wrale/core/theme.dart';
