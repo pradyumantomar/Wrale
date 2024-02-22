@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:provider/provider.dart';
@@ -86,7 +87,9 @@ class Measurement {
     final List<String> strings = exportString.split(' ');
 
     if (strings.length != 2) {
-      print('error with parsing measurement!');
+      if (kDebugMode) {
+        print('error with parsing measurement!');
+      }
     }
 
     return Measurement(

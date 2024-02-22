@@ -46,7 +46,7 @@ class WraleNotifier with ChangeNotifier {
 //getter
   WraleCustomTheme get theme =>
       prefs.theme.toWraleCustomTheme() ??
-      prefs.defaultTheme.toWraleCustomTheme();
+      prefs.defaultTheme.toWraleCustomTheme()!;
 
 // setter
   set theme(WraleCustomTheme newTheme) {
@@ -60,7 +60,7 @@ class WraleNotifier with ChangeNotifier {
   ZoomLevel get zoomLevel => prefs.zoomLevel;
 
   /// choose next Zoom level
-  void nextZoomlevel() {
+  void nextZoomLevel() {
     final ZoomLevel newLevel = prefs.zoomLevel.next;
     if (newLevel != prefs.zoomLevel) {
       prefs.zoomLevel = newLevel;
@@ -118,7 +118,7 @@ class WraleNotifier with ChangeNotifier {
   }
 
   /// getter
-  double get userTargetWeight => prefs.userTargetWeight;
+  double? get userTargetWeight => prefs.userTargetWeight;
 
   // setter
   set useTargetWeight(double? newWeight) {

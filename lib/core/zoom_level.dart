@@ -1,3 +1,6 @@
+import 'package:wrale/core/database.dart';
+import 'package:wrale/core/measurement.dart';
+
 /// zoom level for line chart in [month]
 enum ZoomLevel {
   two,
@@ -30,7 +33,30 @@ extension ZoomLevelExtension on ZoomLevel {
   ZoomLevel get next {
     final ZoomLevel nextLevel =
         ZoomLevel.values[(index + 1) % ZoomLevel.values.length];
+
+// if range of measurements to short show all available
+    if ((_measurements.last.dayInMs - _measurements.first.dayInMs).abs() <
+        nextLevel._rangeInMilliSeconds) {
+      return ZoomLevel.all;
+    }
+    return nextLevel;
   }
+
+  /// get maxX value in [ms]
+  double get maxX => _measurements.last.dayInMs.toDouble();
+
+  /// get minX val in [ms]
+  double get minX {
+    if (this == ZoomLevel.all) {
+      return _measurements.first.dayInMs.toDouble();
+    }
+
+    return _measurements.last.dayInMs - _rangeInMilliSeconds;
+  }
+
+  // get measurements to estimate range, maxX, and minX
+  List<Measurement> get _measurements =>
+      MeasurementDatabase().gaussianExtrapolatedMeasurements;
 
   // get string extension
   String get name => toString().split('.').last;

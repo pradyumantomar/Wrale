@@ -19,9 +19,22 @@ class Language {
 
   /// get language codec
   String get language => _language;
+  // get language name
+  String languageLong(BuildContext context) =>
+      {
+        systemDefault: AppLocalizations.of(context)!.defaultLang,
+        'en': AppLocalizations.of(context)!.english,
+      }[language] ??
+      'error';
 
   @override
   String toString() => 'Language($language)';
+
+  /// convert to Locale
+  Locale toLocale() => Locale.fromSubtags(languageCode: language);
+
+  // compare with other language
+  bool compareTo(Language other) => other.language == language;
 
   /// default undetermined codec
   static const String systemDefault = 'und';
@@ -29,6 +42,8 @@ class Language {
   /// list of supported locals
   static List<Language> supportedLanguage = <Language>[
     Language.system(),
+    ...AppLocalizations.supportedLocales
+        .map((Locale loc) => Language.fromLocale(loc))
   ];
 }
 
